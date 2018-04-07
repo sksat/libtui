@@ -4,18 +4,20 @@
 namespace tui {
 	struct config {
 		constexpr config() :
-			echo(true), canonical(true), signal(true) {}
-		constexpr config(bool e, bool c, bool s) :
-			echo(e), canonical(c), signal(s) {}
+			echo(true), erace(true), canonical(true), signal(true) {}
+		constexpr config(bool ec, bool er, bool c, bool s) :
+			echo(ec), erace(er), canonical(c), signal(s) {}
 
 		template<typename Conf>
 		constexpr bool operator==(Conf c){
 			return true;
 		}
 
-		bool echo, canonical, signal;
+		bool echo, erace;
+		bool canonical, signal;
 
-		static constexpr config raw(){ return config(false, false, false); }
+		static constexpr config raw() {    return config(false, false, false, false); }
+		static constexpr config password(){return config(false, true,  true,  true); }
 
 		static config now();
 		static void set(const config&);

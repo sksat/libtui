@@ -11,6 +11,7 @@ config config::now(){
 
 	auto& l = t.c_lflag;
 	if(l & ECHO)	c.echo = true;
+	if(l & ECHOE)	c.erace= true;
 	if(l & ICANON)	c.canonical = true;
 	if(l & ISIG)	c.signal = true;
 	return c;
@@ -25,6 +26,7 @@ void config::set(const config &c){
 
 	auto& l = t.c_lflag;
 	l &= c.echo << ECHO;
+	l &= c.erace << ECHOE;
 	l &= c.canonical << ICANON;
 	l &= c.signal << ISIG;
 
