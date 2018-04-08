@@ -20,7 +20,7 @@ void print_colname(bool b){
 }
 
 void test_4bitcol(){
-	color4_t col;
+	color4_t col = Black;
 	while(true){
 		col.set_back();
 		print_colname(true);
