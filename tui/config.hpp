@@ -9,8 +9,11 @@ namespace tui {
 			echo(ec), erace(er), canonical(c), signal(s) {}
 
 		template<typename Conf>
-		constexpr bool operator==(Conf c){
-			return true;
+		constexpr bool operator==(Conf c) const {
+			return (c.echo == echo ||
+				c.erace == erace ||
+				c.canonical == canonical ||
+				c.signal == signal);
 		}
 
 		bool echo, erace;
