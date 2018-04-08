@@ -4,6 +4,7 @@
 namespace tui {
 	namespace color {
 		struct color4_t {
+			constexpr color4_t() : num(7) {}
 			constexpr color4_t(const char num) : num(num) {
 				if(num == 8 || num == 9 || num > 18)
 					throw "error: color4_t num"; // コンパイル時にエラーになる
@@ -11,17 +12,21 @@ namespace tui {
 		private:
 			char num;
 		public:
-			constexpr color4_t get_blight() const {
-				color4_t c=*this;
-				if(c.num > 7) throw "error";
-				c.num+=10;
-				return c;
-			}
+			constexpr char get_num() const { return num; }
+			constexpr bool has_next() const { return (num==17 ? false : true); }
+			constexpr color4_t get_next() const { return color4_t(get_num()==7 ? 10 : get_num()+1); }
+			constexpr color4_t get_blight() const { return color4_t(get_num()>7 ? get_num() : get_num()+10); }
 			void set() const {
 				if(num < 8)
 					printf("\e[3%dm", static_cast<int>(num));
 				else
 					printf("\e[9%dm", static_cast<int>(num-10));
+			}
+			void set_back() const {
+				if(num < 8)
+					printf("\e[4%dm", static_cast<int>(num));
+				else
+					printf("\e[10%dm", static_cast<int>(num-10));
 			}
 		};
 

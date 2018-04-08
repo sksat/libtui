@@ -1,14 +1,15 @@
 #include "../tui.hpp"
 
-void print(tui::color::color4_t col, const char* str, bool blight=false){
+using namespace tui::color;
+
+void print(color4_t col, const char* str, bool blight=false){
 	if(blight)
 		col = col.get_blight();
 	col.set();
 	printf(str);
 }
 
-void test_4bitcol(bool b){
-	using namespace tui::color;
+void print_colname(bool b){
 	print(Red, "Red ", b);
 	print(Green, "Green ", b);
 	print(Yellow, "Yellow ", b);
@@ -18,9 +19,25 @@ void test_4bitcol(bool b){
 	print(White, "White\n", b);
 }
 
+void test_4bitcol(){
+	color4_t col;
+	while(true){
+		col.set_back();
+		print_colname(true);
+		print_colname(false);
+		col.get_blight().set_back();
+		print_colname(true);
+		print_colname(false);
+		if(!col.has_next()) break;
+		col = col.get_next();
+	}
+}
+
 int main(int argc, char **argv){
 	using namespace tui;
-
-	test_4bitcol(false);
-	test_4bitcol(true);
+	try{
+		test_4bitcol();
+	}catch(const char* msg){
+		printf(msg);
+	}
 }
