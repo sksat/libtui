@@ -1,7 +1,7 @@
 CXX	= g++
 CXXFLAGS= -g -std=c++14
 
-TEST	= password.elf
+TEST	= color.elf
 
 %.elf : %.cc
 	$(CXX) $(CXXFLAGS) $< -o $@ ../tui.a
