@@ -3,5 +3,6 @@
 
 #include "tui/config.hpp"
 #include "tui/keyboard.hpp"
+#include "tui/color.hpp"
 
 #endif
