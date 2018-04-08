@@ -8,9 +8,15 @@ namespace tui {
 				if(num == 8 || num == 9 || num > 18)
 					throw "error: color4_t num"; // コンパイル時にエラーになる
 			}
-
+		private:
 			char num;
-
+		public:
+			constexpr color4_t get_blight() const {
+				color4_t c=*this;
+				if(c.num > 7) throw "error";
+				c.num+=10;
+				return c;
+			}
 			void set() const {
 				if(num < 8)
 					printf("\e[3%dm", static_cast<int>(num));
@@ -27,11 +33,7 @@ namespace tui {
 		constexpr auto Magenta	= color4_t(5);
 		constexpr auto Cyan	= color4_t(6);
 		constexpr auto White	= color4_t(7);
-		constexpr color4_t Blight(color4_t c){
-			if(c.num > 7) throw "error";
-			c.num+=10;
-			return c;
-		}
+		constexpr color4_t Blight(color4_t c){ return c.get_blight(); }
 		constexpr auto BrightBlack	= Blight(Black);
 		constexpr auto BlightRed	= Blight(Red);
 		constexpr auto BlightGreen	= Blight(Green);

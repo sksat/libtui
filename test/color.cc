@@ -1,7 +1,8 @@
 #include "../tui.hpp"
 
 void print(tui::color::color4_t col, const char* str, bool blight=false){
-	if(blight){col.num+=10;}//col = tui::color::Blight(col);
+	if(blight)
+		col = col.get_blight();
 	col.set();
 	printf(str);
 }
