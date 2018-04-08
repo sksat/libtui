@@ -1,5 +1,5 @@
 CXX	= g++
-CXXFLAGS= -std=c++11 -g
+CXXFLAGS= -std=c++14 -g
 
 TARGET	= tui.a
 OBJS	= tui/config.o tui/keyboard.o
