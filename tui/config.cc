@@ -30,7 +30,7 @@ void config::set(const config &c){
 	l &= c.canonical << ICANON;
 	l &= c.signal << ISIG;
 
-	if(c == raw) cfmakeraw(&t); // 手抜き
+	if(c == raw()) cfmakeraw(&t); // 手抜き
 
 	tcsetattr(STDIN_FILENO, TCSANOW, &t);
 	return;

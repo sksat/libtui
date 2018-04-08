@@ -8,23 +8,17 @@ namespace tui {
 		constexpr config(bool ec, bool er, bool c, bool s) :
 			echo(ec), erace(er), canonical(c), signal(s) {}
 
-		template<typename Conf>
-		constexpr bool operator==(Conf c) const {
-			return (c.echo == echo ||
-				c.erace == erace ||
-				c.canonical == canonical ||
-				c.signal == signal);
-		}
-
 		bool echo, erace;
 		bool canonical, signal;
+
+		constexpr bool operator==(const config c) const { return true; }
 
 		static constexpr config raw() {    return config(false, false, false, false); }
 		static constexpr config password(){return config(false, true,  true,  true); }
 
 		static config now();
 		static void set(const config&);
-		void set(){ config::set(*this); }
+		void set() const { config::set(*this); }
 		static void fix();
 	};
 }
