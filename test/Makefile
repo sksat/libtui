@@ -1,7 +1,7 @@
 CXX	= g++
 CXXFLAGS= -g -std=c++14
 
-TEST	= keyboard.elf
+TEST	= window.elf
 
 %.elf : %.cc
 	$(CXX) $(CXXFLAGS) $< -o $@ ../tui.a
@@ -9,3 +9,7 @@ TEST	= keyboard.elf
 default:
 	make $(TEST)
 	./$(TEST)
+
+clean:
+	rm -f *.o
+	rm -f *.elf

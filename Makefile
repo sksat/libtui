@@ -2,7 +2,7 @@ CXX	= g++
 CXXFLAGS= -std=c++14 -g
 
 TARGET	= tui.a
-OBJS	= tui/config.o tui/keyboard.o
+OBJS	= tui/config.o tui/keyboard.o tui/screen.o
 
 %.o : %.cc
 	$(CXX) $(CXXFLAGS) -c $< -o $@
@@ -14,6 +14,7 @@ default:
 clean:
 	rm -f $(TARGET)
 	rm -f $(OBJS)
+	make -C test clean
 
 $(TARGET) : $(OBJS)
 	ar rcs $@ $(OBJS)

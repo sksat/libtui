@@ -1,6 +1,8 @@
 #ifndef TUI_COLOR_HPP_
 #define TUI_COLOR_HPP_
 
+#include "screen.hpp"
+
 namespace tui {
 	namespace color {
 		struct color4_t {
@@ -17,10 +19,13 @@ namespace tui {
 			constexpr color4_t get_next() const { return color4_t(get_num()==7 ? 10 : get_num()+1); }
 			constexpr color4_t get_blight() const { return color4_t(get_num()>7 ? get_num() : get_num()+10); }
 			void set() const {
+				std::string com = "[";
 				if(num < 8)
-					printf("\e[3%dm", static_cast<int>(num));
+					com += "3" + std::to_string(static_cast<int>(num));
 				else
-					printf("\e[9%dm", static_cast<int>(num-10));
+					com += "9" + std::to_string(static_cast<int>(num-10));
+				com += "m";
+				screen::esc(com);
 			}
 			void set_back() const {
 				if(num < 8)
