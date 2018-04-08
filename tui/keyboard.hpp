@@ -20,7 +20,7 @@ namespace tui {
 			}
 
 			constexpr operator int() const {
-				return (is_print << 14 |
+				return (!is_print << 14 |
 					alt << 13 |
 					ctrl << 12 |
 					shift << 11 |
