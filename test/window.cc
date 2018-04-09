@@ -1,4 +1,5 @@
 #include "../tui.hpp"
+#include <iostream>
 
 int main(int argc, char **argv){
 	using namespace tui;
@@ -8,21 +9,25 @@ int main(int argc, char **argv){
 	screen::enter_ca_mode();
 
 	window win;
-//	win.set_colback(color::Red);
+	std::cout<<"window: width="<<win.get_width()<<", height="<<win.get_height()<<std::endl;
+
+//	win.set_colback(color::Blue);
 
 	while(true){
 		auto key = keyboard::get();
 		switch(key){
-		case 'q': exit(0); break;
+		case 'q': goto fin;
 		case keyboard::Enter:
 			win.draw();
-			printf("aaaaaaaaa");
+			printf("\n~\n\10~\n\10~\n\10~\n");
+			printf("\10aaa");
 			screen::flush();
 			break;
 		default:
 			break;
 		}
 	}
+fin:
 	color::Black.set_back();
 	screen::clear();
 
